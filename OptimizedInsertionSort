@@ -1,0 +1,41 @@
+import java.util.Arrays;
+
+public class OptimizedInsertionSort {
+
+    static Integer[] array = {76, 6, 107, 92, 21, 23, 5, 9, 8, 8143};
+    static int outerIndex;
+    static int temp;
+
+    // Method to shift elements 
+    public static int shift(int startIndex) {
+        temp = array[startIndex];
+        int i = startIndex;
+
+        // Shift elements to the right until the correct position for temp is found
+        for (; i > 0 && array[i - 1] > temp; i--) {
+            array[i] = array[i - 1];
+            System.out.println("i=" + startIndex + "; j=" + (startIndex - i + 1) + ": " + Arrays.deepToString(array));
+        }
+        return i; // Return the correct insertion position
+    }
+
+    // Insert temp at the correct position after shifting
+    public static void insert(int endIndex) {
+        int position = shift(endIndex);
+        array[position] = temp; // Place temp at the correct position
+        System.out.println("After i=" + endIndex + ": " + Arrays.deepToString(array));
+    }
+
+    // Optimized Insertion Sort method
+    public static void insertionSort() {
+        for (outerIndex = 1; outerIndex < array.length; outerIndex++) {
+            insert(outerIndex);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println("Initial Array: " + Arrays.deepToString(array));
+        insertionSort();
+        System.out.println("Sorted Array: " + Arrays.deepToString(array));
+    }
+}
